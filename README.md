@@ -1,8 +1,8 @@
 # INTRO
-Numberplate recognition using Python, OpenCV
+Herken een auto kenteken met Python, OpenCV
 
 # Stappenplan
-Dit vergemakkelijk jouw leven op een Pi
+Dit vergemakkelijk jouw leven op een Pi.
 
 ## Stap 1: installeren Pete Scargill script
 Login op jouw Pi als gebruiker pi.
@@ -21,7 +21,7 @@ pi@rpasberrypi: (venv)$ cd KentekenplaatHerkenning
 Probeer een output
 
 ```bash
-pi@rpasberrypi: (venv)$ python ./KentekenplaatHerkenning.py
+pi@rpasberrypi: (venv)$ python ./kentekenherkenning1.py
 ```
 
 # origineel
