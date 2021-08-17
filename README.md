@@ -17,7 +17,7 @@ pi@rpasberrypi: (venv)$ git clone https://github.com/pappavis/KentekenplaatHerke
 pi@rpasberrypi: (venv)$ cd KentekenplaatHerkenning
 ```
 
-## Stap 2: Python 3 en circuitpython
+## Stap 2: Python kentekenplaat herkenning
 Probeer een output
 
 ```bash
