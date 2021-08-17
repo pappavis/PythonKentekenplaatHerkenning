@@ -8,8 +8,8 @@ De instructies gelden voor Raspberry Pi en MacOS
 Login op jouw Pi als gebruiker pi.
 
 ```bash
-pi@rpasberrypi: $ sudo pip install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5
-pi@rpasberrypi: $ pip install virtualenv
+pi@rpasberrypi: $ sudo apt install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python3-pip
+pi@rpasberrypi: $ pip3 install virtualenv
 pi@rpasberrypi: $ virtualenv ~/venv
 pi@rpasberrypi: $ source ~/venv/bin/activate
 pi@rpasberrypi: (venv)$ pip install numpy imutils pytesseract opencv-python pillow
