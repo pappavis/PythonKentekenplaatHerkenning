@@ -24,7 +24,7 @@ Probeer een output
 pi@rpasberrypi: (venv)$ python ./kentekenherkenning1.py
 ```
 
-<img src="https://github.com/pappavis/KentekenplaatHerkenning/blob/main/voorbeeld_20210817140540-kentekenherkennen.jpg" width="40%" height=""40%>
+<img src="https://github.com/pappavis/KentekenplaatHerkenning/blob/main/voorbeeld_20210817140540-kentekenherkennen.jpg" width="40%" height="40%">
 
 # origineel
 Zie origineel <a href="https://bitbucket.org/api/2.0/snippets/scargill/kAR5qG/master/files/script.sh">hier</a>
