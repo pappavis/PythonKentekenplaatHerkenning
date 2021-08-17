@@ -1,10 +1,11 @@
 # INTRO
 Herken een auto kenteken met Python, OpenCV
 
-# Stappenplan
-Dit vergemakkelijk jouw leven op een Pi.
+# Stappenplan & benodigheden
+Je benodig een Raspberry Pi, maar ook Windows is goed.
+De instructies gelden voor Raspberry Pi en MacOS
 
-## Stap 1: installeren Pete Scargill script
+## Stap 1: installeren bibliotheken
 Login op jouw Pi als gebruiker pi.
 
 ```bash
