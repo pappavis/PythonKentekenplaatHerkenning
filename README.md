@@ -2,7 +2,7 @@ Herken een auto kenteken met Python, OpenCV
 
 # Stappenplan & benodigheden
 Je benodig een Raspberry Pi, maar ook Windows is goed.
-De instructies gelden voor Raspberry Pi en MacOS
+De instructies gelden voor Raspberry Pi en MacOS, voor de beeld moet je een desktopomgeving opstarten.
 
 ## Stap 1: installeren bibliotheken
 Login op jouw Pi als gebruiker pi.
