@@ -13,8 +13,8 @@ pi@rpasberrypi: $ pip install virtualenv
 pi@rpasberrypi: $ virtualenv ~/venv
 pi@rpasberrypi: $ source ~/venv/bin/activate
 pi@rpasberrypi: (venv)$ pip install numpy imutils pytesseract opencv-python pillow
-pi@rpasberrypi: (venv)$ git clone https://github.com/pappavis/KentekenplaatHerkenning
-pi@rpasberrypi: (venv)$ cd KentekenplaatHerkenning
+pi@rpasberrypi: (venv)$ https://github.com/pappavis/PythonKentekenplaatHerkenning
+pi@rpasberrypi: (venv)$ cd PythonKentekenplaatHerkenning
 ```
 
 ## Stap 2: Python kentekenplaat herkenning
