@@ -1,4 +1,3 @@
-# INTRO
 Herken een auto kenteken met Python, OpenCV
 
 # Stappenplan & benodigheden
