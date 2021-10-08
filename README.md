@@ -13,10 +13,17 @@ pi@raspberrypi: $ pip3 install virtualenv
 pi@raspberrypi: $ virtualenv ~/venv
 pi@raspberrypi: $ source ~/venv/bin/activate
 pi@raspberrypi: (venv)$ pip install numpy imutils pytesseract opencv-python pillow
+```
+
+## Stap 2: Clone deze repo
+Voor je deze code uitvoer moet je dit ook clone!
+
+```bash
 pi@raspberrypi: (venv)$ git clone https://github.com/pappavis/PythonKentekenplaatHerkenning
 ```
 
-## Stap 2: Python kentekenplaat herkenning
+
+## Stap 3: Python kentekenplaat herkenning
 Probeer een output
 
 ```bash
