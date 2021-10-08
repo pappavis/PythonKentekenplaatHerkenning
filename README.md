@@ -4,14 +4,24 @@ Herken een auto kenteken met Python, OpenCV
 Je benodig een Raspberry Pi, maar ook Windows is goed.
 De instructies gelden voor Raspberry Pi en MacOS, voor de beeld moet je een desktopomgeving opstarten.
 
-## Stap 1: installeren bibliotheken
-Login op jouw Pi als gebruiker pi.
+## Stap 1: Maakeen python virtual environment
+Login op jouw Pi als gebruiker pi. 
+Deze instructies werken ook op Windows & Mac.
 
 ```bash
-pi@raspberrypi: $ sudo apt install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python3-pip
 pi@raspberrypi: $ pip3 install virtualenv
 pi@raspberrypi: $ virtualenv ~/venv
 pi@raspberrypi: $ source ~/venv/bin/activate
+```
+
+Installeren diverse bibliotheken
+```bash
+pi@raspberrypi: $ sudo apt install -y python3-pip
+pi@raspberrypi: $ sudo apt install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python3-pip
+```
+
+Installeer python bibliotheken
+```bash
 pi@raspberrypi: (venv)$ pip install numpy imutils pytesseract opencv-python pillow
 ```
 
