@@ -10,7 +10,7 @@ Deze instructies werken ook op Windows & Mac.
 
 ```bash
 pi@raspberrypi: $ pip3 install virtualenv
-pi@raspberrypi: $ virtualenv ~/venv
+pi@raspberrypi: $ ~/.local/bin/virtualenv ~/venv
 pi@raspberrypi: $ source ~/venv/bin/activate
 ```
 
