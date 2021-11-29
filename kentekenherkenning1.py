@@ -7,7 +7,7 @@ import os
 
 def main():
   cwd = os.getcwd()
-  bronJPG1 = os.path.join(cwd, "PythonKentekenplaatHerkenning", "kenteken_borent.jpg")
+  bronJPG1 = os.path.join(cwd, "kenteken_borent.jpg")
   print(f'bronbestand={bronJPG1}')
   img = cv2.imread(bronJPG1,cv2.IMREAD_COLOR)  
   img = cv2.resize(img, (620,480) )
