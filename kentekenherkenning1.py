@@ -18,7 +18,7 @@ class clsKentekenHerkenning:
       self.scriptFull = PurePath(__file__)
       self.scriptPath = str(PurePath(self.scriptFull.parent))
 
-  def main(self, bronJPG1=None):
+  def main(self, bronJPG="minicooper1.jpg"):
     cwd = os.getcwd()
     ocv1 = None
     self.__img = None
@@ -27,11 +27,10 @@ class clsKentekenHerkenning:
     if(socket.gethostname().startswith("NL00617")):
       ocv1 = "opencv_uitprobeer"
 
-    if(bronJPG1 is None):
-      bronJPG1 = os.path.join(self.scriptPath, "minicooper1.jpg")
+    bronJPG = os.path.join(self.scriptPath, bronJPG)
 
-    print(f'bronbestand={bronJPG1}')
-    self.__img =cv2.imread(bronJPG1,cv2.IMREAD_COLOR)  
+    print(f'bronbestand={bronJPG}')
+    self.__img =cv2.imread(bronJPG,cv2.IMREAD_COLOR)  
     self.__img =cv2.resize(self.__img, (620,480) )
 
     self.__grayImg = cv2.cvtColor(self.__img, cv2.COLOR_BGR2GRAY) #convert to grey scale
@@ -143,5 +142,5 @@ if __name__=='__main__':
   # CREDITS: https://circuitdigest.com/microcontroller-projects/license-plate-recognition-using-raspberry-pi-and-opencv
   print("App start")
   kenteken1 = clsKentekenHerkenning()
-  kenteken1.main()
+  kenteken1.main(bronJPG="minicooper1.jpg")
   print("App eind")
