@@ -4,32 +4,33 @@ Herken een auto kenteken met Python, OpenCV
 Je benodig een Raspberry Pi, maar ook Windows is goed.
 De instructies gelden voor Raspberry Pi en MacOS, voor de beeld moet je een desktopomgeving opstarten.
 
-## Stap 1: Maakeen python virtual environment
+## Stap 1: Maak een python virtual environment
 Login op jouw Pi als gebruiker pi. 
 Deze instructies werken ook op Windows & Mac.
 
 ```bash
-pi@raspberrypi: $ pip3 install virtualenv
-pi@raspberrypi: $ ~/.local/bin/virtualenv ~/venv
+pi@raspberrypi: $ python3 -m pip install virtualenv
 pi@raspberrypi: $ source ~/venv/bin/activate
+(venv) pi@raspberrypi: $ python -m pip install pipx
 ```
 
 Installeren diverse bibliotheken
 ```bash
-pi@raspberrypi: $ sudo apt install -y python3-pip
-pi@raspberrypi: $ sudo apt install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python3-pip
+(venv) pi@raspberrypi: $ sudo apt install -y python3-pip python3-opencv
+(venv) pi@raspberrypi: $ sudo apt install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python3-pip
 ```
 
 Installeer python bibliotheken
 ```bash
-pi@raspberrypi: (venv)$ pip install numpy imutils pytesseract opencv-python pillow
+(venv) pi@raspberrypi:$ pipx install pytesseract
+(venv) pi@raspberrypi:$ pip install --upgrade numpy imutils pytesseract opencv-python pillow
 ```
 
 ## Stap 2: Clone deze repo
 Voor je deze code uitvoer moet je dit ook clone!
 
 ```bash
-pi@raspberrypi: (venv)$ git clone https://github.com/pappavis/PythonKentekenplaatHerkenning
+(venv) pi@raspberrypi:$ git clone https://github.com/pappavis/PythonKentekenplaatHerkenning
 ```
 
 
@@ -37,8 +38,8 @@ pi@raspberrypi: (venv)$ git clone https://github.com/pappavis/PythonKentekenplaa
 Probeer een output
 
 ```bash
-pi@raspberrypi: (venv)$ cd PythonKentekenplaatHerkenning
-pi@raspberrypi: (venv)$ python ./kentekenherkenning1.py
+(venv) pi@raspberrypi:$ cd PythonKentekenplaatHerkenning
+(venv) pi@raspberrypi:$ python ./kentekenherkenning1.py
 ```
 
 <img src="https://github.com/pappavis/KentekenplaatHerkenning/blob/main/voorbeeld_20210817140540-kentekenherkennen.jpg" width="40%" height="40%">
