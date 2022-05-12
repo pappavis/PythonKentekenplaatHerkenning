@@ -9,6 +9,7 @@ Login op jouw Pi als gebruiker pi.
 Deze instructies werken ook op Windows & Mac.
 
 ```bash
+pi@raspberrypi: $ sudo apt install -y python-is-python3
 pi@raspberrypi: $ python3 -m pip install virtualenv
 pi@raspberrypi: $ source ~/venv/bin/activate
 (venv) pi@raspberrypi: $ python -m pip install pipx
