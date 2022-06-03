@@ -1,69 +1,153 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import cv2
+import imutils
+import numpy as np
+import pytesseract
+from PIL import Image
+import os
+import socket
+import time
 from pathlib import PurePath
 
-# 20220602 ref --> https://programmer.ink/think/opencv-python-tutorial-template-matching.html
-#                   https://www.youtube.com/results?search_query=opencv+ocr+and+text+recognition+with+tesseract+
+class clsKentekenHerkenning:
+  def __init__(self):
+      self.__grayImg = None
+      self.kentekenText = None
+      self.__edged = None
+      self.__detected = False
+      self.__img = None
+      self.scriptFull = PurePath(__file__)
+      self.scriptPath = str(PurePath(self.scriptFull.parent))
+      #self.tesseractCMD = '/usr/local/bin/tesseract'
+      
+      #if(os.name == 'nt'):
+      #    self.tesseractCMD = 'c:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+
+      #pytesseract.pytesseract.tesseract_cmd = self.tesseractCMD
+
+  def main(self, bronJPG="minicooper1.jpg"):
+    cwd = os.getcwd()
+    ocv1 = None
+    self.__img = None
+    logTxt = None
+
+    if(socket.gethostname().startswith("NL00617")):
+      ocv1 = "opencv_uitprobeer"
+
+    bronJPG = os.path.join(self.scriptPath, bronJPG)
+
+    print(f'bronbestand={bronJPG}')
+    self.__img =cv2.imread(bronJPG,cv2.IMREAD_COLOR)  
+    self.__img =cv2.resize(self.__img, (620,480) )
+
+    self.__grayImg = cv2.cvtColor(self.__img, cv2.COLOR_BGR2GRAY) #convert to grey scale
+    logTxt = "1. grayscale -- druk een toets"
+    print(logTxt)
+    cv2.imshow(logTxt, self.__grayImg)
+    cv2.waitKey(3000)        
+
+    self.__grayImg = cv2.bilateralFilter(self.__grayImg, 11, 17, 17) #Blur to reduce noise
+    logTxt = "2 Blur to reduce noise"
+    print(logTxt)
+    cv2.imshow(logTxt, self.__grayImg)
+    cv2.waitKey(3000)        
 
 
-if __name__ == "__main__":
-    print("App start")
-    print("")
-    scriptFull = PurePath(__file__)
-    scriptPath = str(PurePath(scriptFull.parent))
-    plaatjeSrc = f'''{scriptPath}/meterstand_elektra20220429.jpg'''
-    templateSrc = f'''{scriptPath}/meterstand_template.jpg'''
+    self.__edged = cv2.Canny(self.__grayImg, 30, 200) #Perform Edge detection
+    logTxt = f'''3 Perform Edge detection'''
+    print(logTxt)
+    cv2.imshow(logTxt, self.__edged)
+    cv2.waitKey(3000)
+    cv2.destroyAllWindows()
 
-    #Read in the image and take the screenshot as the template image
-    print('VX official account: Orange code / juzicode.com')
-    print('cv2.__version__:',cv2.__version__)
-    plt.rc('font',family='Youyuan',size='9')
-    plt.rc('axes',unicode_minus='False')
-    img_src = cv2.imread(plaatjeSrc) 
-    img_templ = cv2.imread(templateSrc) 
-    print('img_src.shape:',img_src.shape)
-    print('img_templ.shape:',img_templ.shape)
+    # find contours in the edged image, keep only the largest
+    # ones, and initialize our screen contour
+    logTxt = 'findContours'
+    print(logTxt)
+    cnts = cv2.findContours(self.__edged.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    cnts = imutils.grab_contours(cnts)
+    cnts = sorted(cnts, key = cv2.contourArea, reverse = True)[:10]
+    screenCnt = None
+    
+  
+  #
+    # loop over our contours
+    logTxt = f'''loop over our contours'''
+    print(logTxt)
+    for c in cnts:
+      # approximate the contour
+      peri = cv2.arcLength(c, True)
+      approx = cv2.approxPolyDP(c, 0.018 * peri, True)
+      # if our approximated contour has four points, then
+      # we can assume that we have found our screen
+      if len(approx) == 4:
+        screenCnt = approx
+        break
 
-    for method in range(6):
-        #template matching
-        result = cv2.matchTemplate(img_src, img_templ, method)
-        print('result.shape:',result.shape)
-        print('result.dtype:',result.dtype)
-        #Calculate matching position
-        min_max = cv2.minMaxLoc(result)
-        if method == 0 or method == 1:   #According to different patterns, the best matching location has different methods
-            match_loc = min_max[2]
-        else:
-            match_loc = min_max[3]      
-        #Note that when calculating the coordinates of the lower right corner, the width represented by the template image shape[1] shall be added to the x coordinate and the height shall be added to the y coordinate
-        right_bottom = (match_loc[0] + img_templ.shape[1], match_loc[1] + img_templ.shape[0])
-        print('result.min_max:',min_max)
-        print('match_loc:',match_loc)
-        print('right_bottom',right_bottom)
-        #marking position 
-        img_disp = img_src.copy()
-        cv2.rectangle(img_disp, match_loc,right_bottom, (0,255,0), 5, 8, 0 )
-        cv2.normalize( result, result, 0, 255, cv2.NORM_MINMAX, -1 )
-        cv2.circle(result, match_loc, 10, (255,0,0), 2 )
+    if(screenCnt is None):
+      print("No contour detected")
+    else:
+      self.__detected = True
 
-        cv2.imshow(f'''Resultaat: method {method}''', result)
-        cv2.waitKey(2000)
-        cv2.destroyAllWindows()
+    if(self.__detected):
+      cont1 = cv2.drawContours(self.__img, [screenCnt], -1, (0, 255, 0), 3)
 
-        #Display image
-        fig,ax = plt.subplots(2,2)
-        fig.suptitle('Method=%d'%method)
-        ax[0,0].set_title('img_src')
-        ax[0,0].imshow(cv2.cvtColor(img_src,cv2.COLOR_BGR2RGB)) 
-        ax[0,1].set_title('img_templ')
-        ax[0,1].imshow(cv2.cvtColor(img_templ,cv2.COLOR_BGR2RGB)) 
-        ax[1,0].set_title('result')
-        ax[1,0].imshow(result,'gray') 
-        ax[1,1].set_title('img_disp')
-        ax[1,1].imshow(cv2.cvtColor(img_disp,cv2.COLOR_BGR2RGB)) 
-        #ax[0,0].axis('off');ax[0,1].axis('off');ax[1,0].axis('off');ax[1,1].axis('off')
-        plt.show()   
+      logTxt = f'''drawContours'''
+      print(logTxt)
+      cv2.imshow(logTxt, cont1)
+      cv2.waitKey(3000)
+      cv2.destroyAllWindows()
 
-    print("")
-    print("App eind")
+    # Masking the part other than the number plate
+    mask = np.zeros(self.__grayImg.shape,np.uint8)
+    logTxt = f'''mask'''
+    print(logTxt)
+    cv2.imshow(logTxt, mask)
+    cv2.waitKey(3000)
+    cv2.destroyAllWindows()
+
+    new_image = cv2.drawContours(mask,[screenCnt],0,255,-1,)
+    new_image = cv2.bitwise_and(self.__img, self.__img, mask=mask)
+
+    logTxt = f'''new_image -- alleen het kenteken'''
+    print(logTxt)
+    cv2.imshow(logTxt, new_image)
+    cv2.waitKey(3000)
+    cv2.destroyAllWindows()
+
+    # Now crop
+    (x, y) = np.where(mask == 255)
+    (topx, topy) = (np.min(x), np.min(y))
+    (bottomx, bottomy) = (np.max(x), np.max(y))
+    Cropped = self.__grayImg[topx:bottomx+1, topy:bottomy+1]
+    logTxt = f'''Cropped -- alleen het kenteken'''
+    print(logTxt)
+    cv2.imshow(logTxt, Cropped)
+ 
+    #Read the number plate
+    self.kentekenText = pytesseract.image_to_string(Cropped, config='--psm 11')
+    logTxt = f"De herkende kenteken is: {self.kentekenText}"
+    print(logTxt)
+
+    logTxt = f'toon image'
+    print(logTxt)
+    cv2.imshow('image',self.__img)
+    cv2.waitKey(3000)
+    logTxt = f'toon cropped'
+    print(logTxt)
+    cv2.imshow(logTxt, Cropped)
+    cv2.waitKey(3000)
+
+    print("Wachten 5 seconden..")
+    time.sleep(5)
+    cv2.destroyAllWindows()
+
+  @property
+  def edgedImg(self):
+    return self.__edged
+
+if __name__=='__main__':
+  # CREDITS: https://circuitdigest.com/microcontroller-projects/license-plate-recognition-using-raspberry-pi-and-opencv
+  print("App start")
+  kenteken1 = clsKentekenHerkenning()
+  kenteken1.main(bronJPG="meterstand_elektra20220429.jpg")
+  print("App eind")
