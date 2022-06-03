@@ -8,26 +8,28 @@ De instructies gelden voor Raspberry Pi en MacOS, voor de beeld moet je een desk
 Login op jouw Pi als gebruiker pi. 
 Deze instructies werken ook op Windows & Mac.
 
+Stap 1. Installeren diverse bibliotheken
 ```bash
-pi@raspberrypi: $ sudo apt install -y python-is-python3
+(venv) pi@raspberrypi: $ sudo apt install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python3-pip
+```
+
+## Stap 2. OpenCV voorbereiden
+```bash
+pi@raspberrypi: $ sudo apt install -y python-is-python3 python3-pip python3-opencv 
 pi@raspberrypi: $ python3 -m pip install virtualenv
+pi@raspberrypi: $ mkdir ~/venv/
+pi@raspberrypi: $ python3 -m virtualenv ~/venv/
 pi@raspberrypi: $ source ~/venv/bin/activate
 (venv) pi@raspberrypi: $ python -m pip install pipx
 ```
 
-Installeren diverse bibliotheken
-```bash
-(venv) pi@raspberrypi: $ sudo apt install -y python3-pip python3-opencv
-(venv) pi@raspberrypi: $ sudo apt install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python3-pip
-```
-
-Installeer python bibliotheken
+## Stap 3. Installeer python bibliotheken
 ```bash
 (venv) pi@raspberrypi:$ pipx install pytesseract
 (venv) pi@raspberrypi:$ pip install --upgrade numpy imutils pytesseract opencv-python pillow
 ```
 
-## Stap 2: Clone deze repo
+## Stap 4: Clone deze repo
 Voor je deze code uitvoer moet je dit ook clone!
 
 ```bash
@@ -35,7 +37,7 @@ Voor je deze code uitvoer moet je dit ook clone!
 ```
 
 
-## Stap 3: Python kentekenplaat herkenning
+## Stap 5: Python kentekenplaat herkenning
 Probeer een output
 
 ```bash
