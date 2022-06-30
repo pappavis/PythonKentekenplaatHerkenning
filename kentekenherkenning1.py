@@ -139,47 +139,47 @@ class clsKentekenHerkenning:
     return self.__edged
 
 
-    def getCroppedImageFromTemplate(self, imgSrc, imgTemplate):
-      '''getCroppedImageFromTemplate(imgSrc, imgTemplate) -> retval\n.   @brief zoek de desbetreffend beeld in de opgegeven plaatje.  ideaal voor meterstanden uitlezen. @param imgSrc BronplaatjeJPG   @param imgTemplate hetgeen je zoekt in de plaaatje RETURNS: npArray'''
-      npImgSrc1 = cv2.imread(f'''{imgSrc}''', cv2.IMREAD_GRAYSCALE)
-      npTemplate1 = cv2.imread(f'''{imgTemplate}''', cv2.IMREAD_GRAYSCALE)
+  def getCroppedImageFromTemplate(self, imgSrc, imgTemplate):
+    '''getCroppedImageFromTemplate(imgSrc, imgTemplate) -> retval\n.   @brief zoek de desbetreffend beeld in de opgegeven plaatje.  ideaal voor meterstanden uitlezen. @param imgSrc BronplaatjeJPG   @param imgTemplate hetgeen je zoekt in de plaaatje RETURNS: npArray'''
+    npImgSrc1 = cv2.imread(f'''{imgSrc}''', cv2.IMREAD_GRAYSCALE)
+    npTemplate1 = cv2.imread(f'''{imgTemplate}''', cv2.IMREAD_GRAYSCALE)
 
-      h, w = npTemplate1.shape   #hoogte is array van element startpunt boven en eindpunt onder, w=start element links, naar rechts.
-      #voor shapes, zie turital https://www.tutorialspoint.com/numpy/numpy_indexing_and_slicing.htm
+    h, w = npTemplate1.shape   #hoogte is array van element startpunt boven en eindpunt onder, w=start element links, naar rechts.
+    #voor shapes, zie turital https://www.tutorialspoint.com/numpy/numpy_indexing_and_slicing.htm
 
 
-      methods = [cv2.TM_CCOEFF, cv2.TM_CCOEFF_NORMED, cv2.TM_CCORR,
-                  cv2.TM_CCORR_NORMED, cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]
+    methods = [cv2.TM_CCOEFF, cv2.TM_CCOEFF_NORMED, cv2.TM_CCORR,
+                cv2.TM_CCORR_NORMED, cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]
 
-      teller0 = 1
-      npUitgeknipt = None
+    teller0 = 1
+    npUitgeknipt = None
 
-      try:
-          npImgSrc1copy = npImgSrc1.copy()
-          method = cv2.TM_CCOEFF_NORMED
+    try:
+        npImgSrc1copy = npImgSrc1.copy()
+        method = cv2.TM_CCOEFF_NORMED
 
-          print(f'''proberen template te matchen met method {method}''')
+        print(f'''proberen template te matchen met method {method}''')
 
-          matchResult = cv2.matchTemplate(image=npImgSrc1, templ=npTemplate1, method=method)
-          min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(matchResult)
-          if method in [cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]:
-              location = min_loc
-          else:
-              location = max_loc
+        matchResult = cv2.matchTemplate(image=npImgSrc1, templ=npTemplate1, method=method)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(matchResult)
+        if method in [cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]:
+            location = min_loc
+        else:
+            location = max_loc
 
-          cv2.imshow(f'result method={method}', matchResult)
-          cv2.waitKey(2000)
+        cv2.imshow(f'result method={method}', matchResult)
+        cv2.waitKey(2000)
 
-          bottom_right = (location[0] + w, location[1] + h)    
-          npUitgeknipt = npImgSrc1copy[location[1]:bottom_right[1], location[0]:bottom_right[0]]            
-          cv2.rectangle(npImgSrc1copy, location, bottom_right, 255, thickness=5)
+        bottom_right = (location[0] + w, location[1] + h)    
+        npUitgeknipt = npImgSrc1copy[location[1]:bottom_right[1], location[0]:bottom_right[0]]            
+        cv2.rectangle(npImgSrc1copy, location, bottom_right, 255, thickness=5)
 
-      except Exception as ex1:
-          print(traceback.print_exc())
-      finally:
-          cv2.destroyAllWindows()
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
 
-      return npUitgeknipt
+    return npUitgeknipt
 
   
 if __name__=='__main__':
