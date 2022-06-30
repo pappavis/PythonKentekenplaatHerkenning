@@ -10,7 +10,7 @@ from pathlib import PurePath
 import random
 import numpy as np
 import time
-import pytesseract
+#import pytesseract
 #OpenCV Python zoek overeenstemmend in een opgegevn plaatje.
 #ref --> https://youtu.be/T-0lZWYWE9Y?list=PLzMcBGfZo4-lUA8uGjeXhBUUzPYc6vZRn
 #20220630
@@ -20,22 +20,43 @@ class clsMain:
         self.img = None
         self.cap = None
         self.scriptFull = PurePath(__file__)
-        self.scriptPath = str(PurePath(self.scriptFull.parent))
+        self.scriptPath = str(PurePath(self.scriptFull.parent))        
 
     def main(self):
         '''Main routine'''
 
-        templateToUse = f'''{self.scriptPath}/assets/meterstand_template_leeg.jpg'''
+        templateMeterstand = f'''{self.scriptPath}/assets/meterstand_template_leeg.jpg'''
+        templateKentekenNLToUse = f'''{self.scriptPath}/assets/template_kentekenNL01.jpg'''
+
         plaatjesDict = [{"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test1.jpg''',
-                         "imgTemplateSr1" : templateToUse},
+                         "imgTemplateSr1" : templateMeterstand},
+
                          {"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test2.jpg''',
-                         "imgTemplateSr1" : templateToUse}
-                         ]
+                         "imgTemplateSr1" : templateMeterstand},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test3.jpg''',
+                         "imgTemplateSr1" : templateMeterstand},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/minicooper1.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/kenteken_borent.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/NL_auto_vooraanzicht03_aygo.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/kenteken_KL55R2473.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse}
+
+                        ]
 
         try:
+            intTeller = 0
             for item1 in plaatjesDict:
                 imgSrc1 = item1["imgSrc1"]
                 imgTemplateSr1 = item1["imgTemplateSr1"]
+                print(f'''{intTeller} Probeer demo: {imgSrc1}''')
 
                 npUitgeknipt, rect1 = self.getCroppedImageFromTemplate(imgSrc=imgSrc1, imgTemplate=imgTemplateSr1)
 
@@ -50,9 +71,10 @@ class clsMain:
 
                 cv2.destroyAllWindows()
 
-                ocrStr = pytesseract.image_to_string(resultImg)
-                print(f'''OCRed={ocrStr}''')
-
+                #ocrStr = pytesseract.image_to_string(resultImg)
+                #print(f'''OCRed={ocrStr}''')
+                #print("")
+                intTeller += 1
 
         except Exception as ex1:
             print(traceback.print_exc())
@@ -60,7 +82,7 @@ class clsMain:
             cv2.destroyAllWindows()
 
 
-    def getCroppedImageFromTemplate(self, imgSrc, imgTemplate):
+    def getCroppedImageFromTemplate(self, imgSrc, imgTemplate, debug=False):
         '''getCroppedImageFromTemplate(imgSrc, imgTemplate) -> retval\n.   @brief zoek de desbetreffend beeld in de opgegeven plaatje.  ideaal voor meterstanden uitlezen. @param imgSrc BronplaatjeJPG   @param imgTemplate hetgeen je zoekt in de plaaatje RETURNS: npArray'''
         npImgSrc1 = cv2.imread(f'''{imgSrc}''', cv2.IMREAD_GRAYSCALE)
         npTemplate1 = cv2.imread(f'''{imgTemplate}''', cv2.IMREAD_GRAYSCALE)
@@ -90,9 +112,10 @@ class clsMain:
             else:
                 location = max_loc
 
-            print(f'''Overeenstemmend beeld wordt getoond: {matchResult}''')
-            cv2.imshow(f'matchResult getoond', matchResult)
-            cv2.waitKey(2000)
+            if(debug):
+                print(f'''Overeenstemmend beeld wordt getoond''')
+                cv2.imshow(f'matchResult getoond', matchResult)
+                cv2.waitKey(2000)
 
             bottom_right = (location[0] + w, location[1] + h)    
             npUitgeknipt = npImgSrc1copy[location[1]:bottom_right[1], location[0]:bottom_right[0]]        
