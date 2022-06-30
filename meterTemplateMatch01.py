@@ -27,6 +27,7 @@ class clsMain:
 
         templateMeterstand = f'''{self.scriptPath}/assets/meterstand_template_leeg.jpg'''
         templateKentekenNLToUse = f'''{self.scriptPath}/assets/template_kentekenNL01.jpg'''
+        templateKentekenNLToUse02 = f'''{self.scriptPath}/assets/template_kentekenNL02.jpg'''
 
         plaatjesDict = [{"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test1.jpg''',
                          "imgTemplateSr1" : templateMeterstand},
@@ -37,6 +38,15 @@ class clsMain:
                          {"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test3.jpg''',
                          "imgTemplateSr1" : templateMeterstand},
 
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test3_geenMeting.jpg''',
+                         "imgTemplateSr1" : templateMeterstand},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test3_meting_rarePositie.jpg''',
+                         "imgTemplateSr1" : templateMeterstand},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test1.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse},
+
                          {"imgSrc1" : f'''{self.scriptPath}/assets/minicooper1.jpg''',
                          "imgTemplateSr1" : templateKentekenNLToUse},
 
@@ -46,8 +56,21 @@ class clsMain:
                          {"imgSrc1" : f'''{self.scriptPath}/assets/NL_auto_vooraanzicht03_aygo.jpg''',
                          "imgTemplateSr1" : templateKentekenNLToUse},
 
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/NL_auto_vooraanzicht03_aygo.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse02},
+
                          {"imgSrc1" : f'''{self.scriptPath}/assets/kenteken_KL55R2473.jpg''',
-                         "imgTemplateSr1" : templateKentekenNLToUse}
+                         "imgTemplateSr1" : templateKentekenNLToUse},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/NL_auto_lancia01.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/NL_auto_lancia01.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse02},
+
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/NL_auto_vooraanzicht03_aygo.jpg''',
+                         "imgTemplateSr1" : templateKentekenNLToUse02}
+
 
                         ]
 
@@ -61,12 +84,12 @@ class clsMain:
                 npUitgeknipt, rect1 = self.getCroppedImageFromTemplate(imgSrc=imgSrc1, imgTemplate=imgTemplateSr1)
 
                 cv2.imwrite(f'''{self.scriptPath}/assets/resultaat_meterTemplateMatch01_rect1.jpg''', rect1)
-                cv2.imshow(f'rect1=versie', rect1)
+                cv2.imshow(f'{intTeller} rect1', rect1)
                 cv2.waitKey(2000)
 
                 resultImg = f'''{self.scriptPath}/assets/resultaat_meterTemplateMatch01_npUitgeknipt.jpg'''
                 cv2.imwrite(f'''{resultImg}''', npUitgeknipt)
-                cv2.imshow(f'npUitgeknipt=versie', npUitgeknipt)
+                cv2.imshow(f'{intTeller} npUitgeknipt=versie', npUitgeknipt)
                 cv2.waitKey(2000)
 
                 cv2.destroyAllWindows()
