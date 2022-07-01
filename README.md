@@ -46,8 +46,8 @@ Probeer een output
 <img src="https://github.com/pappavis/KentekenplaatHerkenning/blob/main/voorbeeld_20210817140540-kentekenherkennen.jpg" width="40%" height="40%">
 
 # Experimenteel
- - <a href="./kentekenherkenningANPR.py" title="experimenteer">kentekenherkenningANPR.py</a> heeft commandline interface.
- - <a href="./meterTemplateMatch01.py">meterTemplateMatch01.py</a> probeert middels template een kenteken en/of elektrameter waarde uitlezen.
+ - <a href="./kentekenherkenningANPR.py" title="experimenteer" target="_blank">kentekenherkenningANPR.py</a> heeft commandline interface.
+ - <a href="./meterTemplateMatch01.py" target="_blank">meterTemplateMatch01.py</a> probeert middels template een kenteken en/of elektrameter waarde uitlezen.
 
 
 # CREDITS
