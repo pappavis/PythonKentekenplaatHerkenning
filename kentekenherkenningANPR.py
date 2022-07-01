@@ -215,6 +215,7 @@ class clsMain:
 			# load the input image from disk and resize it
 			image = cv2.imread(imagePath)
 			image = imutils.resize(image, width=600)
+			print(''Inlezen {image}'')			
 			# apply automatic license plate recognition
 			(lpText, lpCnt) = anpr.find_and_ocr(image, psm=args["psm"],
 				clearBorder=args["clear_border"] > 0)
