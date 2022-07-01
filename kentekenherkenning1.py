@@ -129,9 +129,14 @@ class clsKentekenHerkenning:
 
     logTxt = f'''new_image -- alleen het kenteken'''
     print(logTxt)
-    cv2.imshow(logTxt, new_image)
-    cv2.waitKey(3000)
-    cv2.destroyAllWindows()
+    try:
+      cv2.imshow(logTxt, new_image)
+      cv2.waitKey(3000)
+      cv2.destroyAllWindows()
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
 
     # Now crop
     (x, y) = np.where(mask == 255)
@@ -140,7 +145,12 @@ class clsKentekenHerkenning:
     Cropped = self.__grayImg[topx:bottomx+1, topy:bottomy+1]
     logTxt = f'''Cropped -- alleen het kenteken'''
     print(logTxt)
-    cv2.imshow(logTxt, Cropped)
+    try:
+      cv2.imshow(logTxt, Cropped)
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
  
     #Read the number plate
     self.kentekenText = pytesseract.image_to_string(Cropped, config='--psm 11')
