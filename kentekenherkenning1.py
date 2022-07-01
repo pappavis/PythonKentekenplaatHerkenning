@@ -87,17 +87,27 @@ class clsKentekenHerkenning:
 
       logTxt = f'''drawContours'''
       print(logTxt)
-      cv2.imshow(logTxt, cont1)
-      cv2.waitKey(3000)
-      cv2.destroyAllWindows()
+      try:
+        cv2.imshow(logTxt, cont1)
+        cv2.waitKey(3000)
+        cv2.destroyAllWindows()
+      except Exception as ex1:
+          print(traceback.print_exc())
+      finally:
+          cv2.destroyAllWindows()
 
     # Masking the part other than the number plate
     mask = np.zeros(self.__grayImg.shape,np.uint8)
     logTxt = f'''mask'''
     print(logTxt)
-    cv2.imshow(logTxt, mask)
-    cv2.waitKey(3000)
-    cv2.destroyAllWindows()
+    try:
+      cv2.imshow(logTxt, mask)
+      cv2.waitKey(3000)
+      cv2.destroyAllWindows()
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
 
     new_image = cv2.drawContours(mask,[screenCnt],0,255,-1,)
     new_image = cv2.bitwise_and(self.__img, self.__img, mask=mask)
@@ -124,12 +134,22 @@ class clsKentekenHerkenning:
 
     logTxt = f'toon image'
     print(logTxt)
-    cv2.imshow('image',self.__img)
-    cv2.waitKey(3000)
+    try:        
+      cv2.imshow('image',self.__img)
+      cv2.waitKey(3000)
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
     logTxt = f'toon cropped'
-    print(logTxt)
-    cv2.imshow(logTxt, Cropped)
-    cv2.waitKey(3000)
+    print(logTxt)    
+    try:
+      cv2.imshow(logTxt, Cropped)
+      cv2.waitKey(3000)
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
 
     print("Wachten 5 seconden..")
     time.sleep(5)
