@@ -37,8 +37,13 @@ class clsKentekenHerkenning:
     self.__grayImg = cv2.cvtColor(self.__img, cv2.COLOR_BGR2GRAY) #convert to grey scale
     logTxt = "1. grayscale -- druk een toets"
     print(logTxt)
-    cv2.imshow(logTxt, self.__grayImg)
-    cv2.waitKey(3000)        
+    try:
+      cv2.imshow(logTxt, self.__grayImg)
+      cv2.waitKey(3000)        
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
 
     self.__grayImg = cv2.bilateralFilter(self.__grayImg, 11, 17, 17) #Blur to reduce noise
     logTxt = "2 Blur to reduce noise"
