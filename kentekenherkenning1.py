@@ -7,6 +7,7 @@ import os
 import socket
 import time
 from pathlib import PurePath
+import traceback
 
 class clsKentekenHerkenning:
   def __init__(self):
@@ -186,5 +187,5 @@ if __name__=='__main__':
   # CREDITS: https://circuitdigest.com/microcontroller-projects/license-plate-recognition-using-raspberry-pi-and-opencv
   print("App start")
   kenteken1 = clsKentekenHerkenning()
-  kenteken1.main(bronJPG="minicooper1.jpg")
+  kenteken1.main(bronJPG="assets/minicooper1.jpg")
   print("App eind")
