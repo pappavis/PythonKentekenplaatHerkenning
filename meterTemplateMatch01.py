@@ -84,13 +84,20 @@ class clsMain:
                 npUitgeknipt, rect1 = self.getCroppedImageFromTemplate(imgSrc=imgSrc1, imgTemplate=imgTemplateSr1)
 
                 cv2.imwrite(f'''{self.scriptPath}/out/resultaat_meterTemplateMatch01_rect1.jpg''', rect1)
-                cv2.imshow(f'{intTeller} rect1', rect1)
-                cv2.waitKey(2000)
+                try:
+                    cv2.imshow(f'{intTeller} rect1', rect1)
+                    cv2.waitKey(2000)
+                except Exception as ex1:
+                    print(traceback.print_exc())
 
                 resultImg = f'''{self.scriptPath}/out/resultaat_meterTemplateMatch01_npUitgeknipt.jpg'''
                 cv2.imwrite(f'''{resultImg}''', npUitgeknipt)
-                cv2.imshow(f'{intTeller} npUitgeknipt=versie', npUitgeknipt)
-                cv2.waitKey(2000)                
+
+                try:
+                    cv2.imshow(f'{intTeller} npUitgeknipt=versie', npUitgeknipt)
+                    cv2.waitKey(2000)                
+                except Exception as ex1:
+                    print(traceback.print_exc())
 
                 resultOCR = pytesseract.image_to_string(image=resultImg)
                 print(f'''strOutOCR={resultOCR}''')
