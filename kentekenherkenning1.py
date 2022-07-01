@@ -48,16 +48,26 @@ class clsKentekenHerkenning:
     self.__grayImg = cv2.bilateralFilter(self.__grayImg, 11, 17, 17) #Blur to reduce noise
     logTxt = "2 Blur to reduce noise"
     print(logTxt)
-    cv2.imshow(logTxt, self.__grayImg)
-    cv2.waitKey(3000)        
+    try:
+      cv2.imshow(logTxt, self.__grayImg)
+      cv2.waitKey(3000)        
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
 
 
     self.__edged = cv2.Canny(self.__grayImg, 30, 200) #Perform Edge detection
     logTxt = f'''3 Perform Edge detection'''
     print(logTxt)
-    cv2.imshow(logTxt, self.__edged)
-    cv2.waitKey(3000)
-    cv2.destroyAllWindows()
+    try:
+      cv2.imshow(logTxt, self.__edged)
+      cv2.waitKey(3000)
+      cv2.destroyAllWindows()
+    except Exception as ex1:
+        print(traceback.print_exc())
+    finally:
+        cv2.destroyAllWindows()
 
     # find contours in the edged image, keep only the largest
     # ones, and initialize our screen contour
