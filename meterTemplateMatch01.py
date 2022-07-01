@@ -10,7 +10,7 @@ from pathlib import PurePath
 import random
 import numpy as np
 import time
-#import pytesseract
+import pytesseract
 #OpenCV Python zoek overeenstemmend in een opgegevn plaatje.
 #ref --> https://youtu.be/T-0lZWYWE9Y?list=PLzMcBGfZo4-lUA8uGjeXhBUUzPYc6vZRn
 #20220630
@@ -83,16 +83,17 @@ class clsMain:
 
                 npUitgeknipt, rect1 = self.getCroppedImageFromTemplate(imgSrc=imgSrc1, imgTemplate=imgTemplateSr1)
 
-                cv2.imwrite(f'''{self.scriptPath}/assets/resultaat_meterTemplateMatch01_rect1.jpg''', rect1)
+                cv2.imwrite(f'''{self.scriptPath}/out/resultaat_meterTemplateMatch01_rect1.jpg''', rect1)
                 cv2.imshow(f'{intTeller} rect1', rect1)
                 cv2.waitKey(2000)
 
-                resultImg = f'''{self.scriptPath}/assets/resultaat_meterTemplateMatch01_npUitgeknipt.jpg'''
+                resultImg = f'''{self.scriptPath}/out/resultaat_meterTemplateMatch01_npUitgeknipt.jpg'''
                 cv2.imwrite(f'''{resultImg}''', npUitgeknipt)
                 cv2.imshow(f'{intTeller} npUitgeknipt=versie', npUitgeknipt)
-                cv2.waitKey(2000)
+                cv2.waitKey(2000)                
 
-                cv2.destroyAllWindows()
+                resultOCR = pytesseract.image_to_string(image=resultImg)
+                print(f'''strOutOCR={resultOCR}''')
 
                 #ocrStr = pytesseract.image_to_string(resultImg)
                 #print(f'''OCRed={ocrStr}''')
