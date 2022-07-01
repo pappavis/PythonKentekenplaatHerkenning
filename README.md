@@ -24,7 +24,7 @@ pi@raspberrypi: $ source ~/venv/bin/activate
 
 ## Stap 3. Installeer python bibliotheken
 ```bash
-(venv) pi@raspberrypi:$ pip install --upgrade pytesseract numpy imutils opencv-python pillow pytesseract
+(venv) pi@raspberrypi:$ pip install --upgrade pytesseract numpy imutils opencv-python pillow pytesseract scikit-image
 ```
 
 ## Stap 4: Clone deze repo
