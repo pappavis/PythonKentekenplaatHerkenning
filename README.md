@@ -45,6 +45,11 @@ Probeer een output
 
 <img src="https://github.com/pappavis/KentekenplaatHerkenning/blob/main/voorbeeld_20210817140540-kentekenherkennen.jpg" width="40%" height="40%">
 
+# Experimenteel
+ - kentekenherkenningANPR.py heeft commandline interface.
+ - meterTemplateMatch01.py probeert middels template een kenteken en/of elektrameter waarde uitlezen.
+
+
 # CREDITS
 Zie origineel <a href="https://circuitdigest.com/microcontroller-projects/license-plate-recognition-using-raspberry-pi-and-opencv">hier</a>
 
