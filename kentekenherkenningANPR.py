@@ -8,6 +8,7 @@ from imutils import paths
 import cv2
 import traceback
 import argparse
+from pathlib import PurePath
 
 def cleanup_text(text):
 	# strip out non-ASCII text so we can draw the text on the image
@@ -21,7 +22,8 @@ class PyImageSearchANPR:
 		self.minAR = minAR
 		self.maxAR = maxAR
 		self.debug = debug
-
+		self.scriptFull = PurePath(__file__)
+		self.scriptPath = str(PurePath(self.scriptFull.parent))        
 
 
 	def debug_imshow(self, title, image, waitKey=False):
@@ -187,7 +189,7 @@ class clsMain:
 		ap = argparse.ArgumentParser()
 
 		if(self.DEBUGMODE):
-			ap.add_argument("-i", "--input", type=str,default=f"C:\\Users\\m.erasmus\\OneDrive - Fugro\\Programmacode\\python\\uitprobeersels\\opencv_uitprobeer\\randendetecteren\\assets",
+			ap.add_argument("-i", "--input", type=str,default=f"{self.scriptPath}/assets",
 			help="path to input directory of images")
 		else:
 			ap.add_argument("-i", "--input", required=True,
@@ -243,6 +245,6 @@ class clsMain:
 
 if __name__ == "__main__":
     print("App start")
-    main1 = clsMain(debug=True)
+    main1 = clsMain(debug=False)
     main1.main()
     print("App eind")
