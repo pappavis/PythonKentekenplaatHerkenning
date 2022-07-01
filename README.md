@@ -20,13 +20,11 @@ pi@raspberrypi: $ python3 -m pip install virtualenv
 pi@raspberrypi: $ mkdir ~/venv/
 pi@raspberrypi: $ python3 -m virtualenv ~/venv/
 pi@raspberrypi: $ source ~/venv/bin/activate
-(venv) pi@raspberrypi: $ python -m pip install pipx
 ```
 
 ## Stap 3. Installeer python bibliotheken
 ```bash
-(venv) pi@raspberrypi:$ pipx install pytesseract
-(venv) pi@raspberrypi:$ pip install --upgrade numpy imutils pytesseract opencv-python pillow
+(venv) pi@raspberrypi:$ pip install --upgrade pytesseract numpy imutils opencv-python pillow pytesseract
 ```
 
 ## Stap 4: Clone deze repo
