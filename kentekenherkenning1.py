@@ -173,7 +173,12 @@ class clsKentekenHerkenning:
       try:
         cv2.imshow(logTxt, Cropped)
         cv2.waitKey(3000)
+      except Exception as ex1:
+          print(traceback.print_exc())
+      finally:
+          cv2.destroyAllWindows()
 
+      try:
         #Read the number plate
         # ref-->https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/
         kentekenText = self.kentekenText = pytesseract.image_to_string(image=Cropped, config="--psm 6")
