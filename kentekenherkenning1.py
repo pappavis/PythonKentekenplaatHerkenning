@@ -173,7 +173,8 @@ class clsKentekenHerkenning:
         cv2.waitKey(3000)
 
         #Read the number plate
-        kentekenText = self.kentekenText = pytesseract.image_to_string(Cropped)
+        # ref-->https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/
+        kentekenText = self.kentekenText = pytesseract.image_to_string(image=Cropped, config="--psm 6")
         logTxt = f"De herkende kenteken is: {self.kentekenText}"
         print(logTxt)
       except Exception as ex1:
