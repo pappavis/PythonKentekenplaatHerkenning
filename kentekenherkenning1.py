@@ -182,8 +182,6 @@ class clsKentekenHerkenning:
         #Read the number plate
         # ref-->https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/
         kentekenText = self.kentekenText = pytesseract.image_to_string(image=Cropped, config="--psm 6")
-        logTxt = f"De herkende kenteken is: {self.kentekenText}"
-        print(logTxt)
       except Exception as ex1:
           print(traceback.print_exc())
 
@@ -250,14 +248,17 @@ if __name__=='__main__':
 
   try:
     kentekenText = kenteken1.main(bronJPG=f'''assets/minicooper1.jpg''')
+    logTxt = f"De herkende kenteken is: {kentekenText}"
+    print(logTxt)
 
     for item1 in os.listdir(os.path.join(kenteken1.scriptPath, "assets")):
       if(item1.upper().endswith("JPG") or item1.upper().endswith("PNG") or item1.upper().endswith("GIF")):
         print("")
+        print("")
         print("----------------------------")
         print(f"Probeer herkenning van: {item1}")
         kentekenText = kenteken1.main(bronJPG=f'''assets/{item1}''')
-        print("")
+        print(f"kenteken={kentekenText}")
   except Exception as ex1:
     print(traceback.print_exc())
 
