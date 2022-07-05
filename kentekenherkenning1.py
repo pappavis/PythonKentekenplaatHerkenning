@@ -245,6 +245,10 @@ if __name__=='__main__':
   print("App start")
   kenteken1 = clsKentekenHerkenning()
   kentekenText = None
+  print(f"")
+  print(f"SYNOPIS:")
+  print(f"Deze code loopt door een dir en probeert rechthoeken te detecteren en daarin de kenteken proberen bepalen.")
+  print(f"")
 
   try:
     kentekenText = kenteken1.main(bronJPG=f'''assets/minicooper1.jpg''')
