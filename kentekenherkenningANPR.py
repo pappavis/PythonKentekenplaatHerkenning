@@ -236,6 +236,8 @@ class clsMain:
 				print("[INFO] {}".format(lpText))
 
 				try:
+					logTxt = f"kenteken herkend: {lpText}"
+					print(logTxt)
 					cv2.imshow("Output ANPR", image)
 					cv2.waitKey(2000)
 				except Exception as ex1:
