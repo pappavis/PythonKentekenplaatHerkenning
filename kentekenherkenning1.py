@@ -152,11 +152,6 @@ class clsKentekenHerkenning:
       finally:
           cv2.destroyAllWindows()
   
-      #Read the number plate
-      self.kentekenText = pytesseract.image_to_string(Cropped, config='--psm 11')
-      logTxt = f"De herkende kenteken is: {self.kentekenText}"
-      print(logTxt)
-
       logTxt = f'toon image'
       print(logTxt)
       try:        
@@ -171,6 +166,11 @@ class clsKentekenHerkenning:
       try:
         cv2.imshow(logTxt, Cropped)
         cv2.waitKey(3000)
+
+        #Read the number plate
+        self.kentekenText = pytesseract.image_to_string(Cropped)
+        logTxt = f"De herkende kenteken is: {self.kentekenText}"
+        print(logTxt)
       except Exception as ex1:
           print(traceback.print_exc())
       finally:
