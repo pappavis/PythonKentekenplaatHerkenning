@@ -11,6 +11,7 @@ import traceback
 
 class clsKentekenHerkenning:
   def __init__(self):
+      '''Doen kentekenherkenning.'''
       self.__grayImg = None
       self.kentekenText = None
       self.__edged = None
@@ -20,10 +21,14 @@ class clsKentekenHerkenning:
       self.scriptPath = str(PurePath(self.scriptFull.parent))
 
   def main(self, bronJPG="minicooper1.jpg"):
+    '''Main procedure. \
+    @param bronJPG: Een plaatje om te proberen OCR.'''
+
     cwd = os.getcwd()
     ocv1 = None
     self.__img = None
     logTxt = None
+    kentekenText = None
 
     if(socket.gethostname().startswith("NL00617")):
       ocv1 = "opencv_uitprobeer"
@@ -168,7 +173,7 @@ class clsKentekenHerkenning:
         cv2.waitKey(3000)
 
         #Read the number plate
-        self.kentekenText = pytesseract.image_to_string(Cropped)
+        kentekenText = self.kentekenText = pytesseract.image_to_string(Cropped)
         logTxt = f"De herkende kenteken is: {self.kentekenText}"
         print(logTxt)
       except Exception as ex1:
@@ -180,6 +185,7 @@ class clsKentekenHerkenning:
       time.sleep(5)
 
     cv2.destroyAllWindows()
+    return kentekenText
 
 
   @property
@@ -234,22 +240,18 @@ if __name__=='__main__':
   # CREDITS: https://circuitdigest.com/microcontroller-projects/license-plate-recognition-using-raspberry-pi-and-opencv
   print("App start")
   kenteken1 = clsKentekenHerkenning()
-
-  kentekens = [
-              "kenteken_borent.jpg", "minicooper1.jpg",
-              "NL_auto_vooraanzicht03_aygo.jpg", "meterstand_elektra20220429.jpg", "meterstand_elektra20220429_orig.jpg",
-              "NL_auto_02.jpg", "NL_auto_lancia01.jpg", "NL_auto_vooraanzicht01_aygo.jpg",
-              "meterstand_elektra20220516.jpg", "meterstand_elektra20220630.jpg", "meterstand_elektra20220630_test1.jpg", "meterstand_elektra20220630_test2.jpg",
-              "meterstand_elektra20220630_test3.jpg", "meterstand_elektra20220630_test3_geenMeting.jpg", "meterstand_elektra20220630_test3_meting_rarePositie.jpg", "meterstand_elektra202200704.jpg"
-              ]
+  kentekenText = None
 
   try:
-    for item1 in kentekens:
-      print("")
-      print("----------------------------")
-      print(f"Probeer herkenning van: {item1}")
-      kenteken1.main(bronJPG=f'''assets/{item1}''')
-      print("")
+    kentekenText = kenteken1.main(bronJPG=f'''assets/minicooper1.jpg''')
+
+    for item1 in os.listdir(os.path.join(kenteken1.scriptPath, "assets")):
+      if(item1.upper().endswith("JPG") or item1.upper().endswith("PNG") or item1.upper().endswith("GIF")):
+        print("")
+        print("----------------------------")
+        print(f"Probeer herkenning van: {item1}")
+        kentekenText = kenteken1.main(bronJPG=f'''assets/{item1}''')
+        print("")
   except Exception as ex1:
     print(traceback.print_exc())
 
