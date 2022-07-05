@@ -38,12 +38,13 @@ Voor je deze code uitvoer moet je dit ook clone!
 ## Stap 5: Python kentekenplaat herkenning
 Probeer een output
 
+<img src="https://github.com/pappavis/KentekenplaatHerkenning/blob/main/minicooper1.jpg" width="40%" height="40%">
+
 ```bash
 (venv) pi@raspberrypi:$ cd PythonKentekenplaatHerkenning
 (venv) pi@raspberrypi:$ python ./kentekenherkenning1.py
+De herkende kenteken is: IHR 26 BR 9044
 ```
-
-<img src="https://github.com/pappavis/KentekenplaatHerkenning/blob/main/voorbeeld_20210817140540-kentekenherkennen.jpg" width="40%" height="40%">
 
 # Experimenteel
  - <a href="./kentekenherkenningANPR.py" title="experimenteer" target="_blank">kentekenherkenningANPR.py</a> heeft commandline interface.
