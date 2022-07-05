@@ -134,7 +134,7 @@ class clsMain:
         rect1 = None
 
         try:
-            print(f'''Maak een copy van {npImgSrc1}''')
+            print(f'''Maak een copy van {imgSrc}''')
             npImgSrc1copy = npImgSrc1.copy()
             method = cv2.TM_CCOEFF_NORMED
 

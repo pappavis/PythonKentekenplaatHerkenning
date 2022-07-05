@@ -9,6 +9,8 @@ import time
 from pathlib import PurePath
 import traceback
 
+# zoek kentekens in plaatjes.
+
 class clsKentekenHerkenning:
   def __init__(self):
       '''Doen kentekenherkenning.'''
