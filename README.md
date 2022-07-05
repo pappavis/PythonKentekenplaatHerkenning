@@ -50,7 +50,7 @@ Probeer een output
  - <a href="./meterTemplateMatch01.py" target="_blank">meterTemplateMatch01.py</a> probeert middels template een kenteken en/of elektrameter waarde uitlezen.
 
 # Opmerkingen
- - In het map "assets" staat veel testdata. De enige goede is <a href="./minicooper1.jpg" target="_blank">minicooper1.jpg</a>, de overige herkent hij nauwelijks/niet.
+ - In het map "assets" staat veel testdata. De enige goede is <a href="./assets/minicooper1.jpg" target="_blank">minicooper1.jpg</a>, de overige herkent hij nauwelijks/niet.
 
 # CREDITS
 Zie origineel <a href="https://circuitdigest.com/microcontroller-projects/license-plate-recognition-using-raspberry-pi-and-opencv">hier</a>
