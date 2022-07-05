@@ -32,7 +32,7 @@ class clsKentekenHerkenning:
 
     print(f'bronbestand={bronJPG}')
     self.__img =cv2.imread(bronJPG,cv2.IMREAD_COLOR)  
-    self.__img =cv2.resize(self.__img, (620,480) )
+    #self.__img =cv2.resize(self.__img, (620,480) )
 
     self.__grayImg = cv2.cvtColor(self.__img, cv2.COLOR_BGR2GRAY) #convert to grey scale
     logTxt = "1. grayscale -- druk een toets"
@@ -97,13 +97,26 @@ class clsKentekenHerkenning:
     else:
       self.__detected = True
 
-    if(self.__detected):
-      cont1 = cv2.drawContours(self.__img, [screenCnt], -1, (0, 255, 0), 3)
+      if(self.__detected):
+        cont1 = cv2.drawContours(self.__img, [screenCnt], -1, (0, 255, 0), 3)
 
-      logTxt = f'''drawContours'''
+        logTxt = f'''drawContours'''
+        print(logTxt)
+        try:
+          cv2.imshow(logTxt, cont1)
+          cv2.waitKey(3000)
+          cv2.destroyAllWindows()
+        except Exception as ex1:
+            print(traceback.print_exc())
+        finally:
+            cv2.destroyAllWindows()
+
+      # Masking the part other than the number plate
+      mask = np.zeros(self.__grayImg.shape,np.uint8)
+      logTxt = f'''mask'''
       print(logTxt)
       try:
-        cv2.imshow(logTxt, cont1)
+        cv2.imshow(logTxt, mask)
         cv2.waitKey(3000)
         cv2.destroyAllWindows()
       except Exception as ex1:
@@ -111,74 +124,63 @@ class clsKentekenHerkenning:
       finally:
           cv2.destroyAllWindows()
 
-    # Masking the part other than the number plate
-    mask = np.zeros(self.__grayImg.shape,np.uint8)
-    logTxt = f'''mask'''
-    print(logTxt)
-    try:
-      cv2.imshow(logTxt, mask)
-      cv2.waitKey(3000)
-      cv2.destroyAllWindows()
-    except Exception as ex1:
-        print(traceback.print_exc())
-    finally:
-        cv2.destroyAllWindows()
+      new_image = cv2.drawContours(mask,[screenCnt],0,255,-1,)
+      new_image = cv2.bitwise_and(self.__img, self.__img, mask=mask)
 
-    new_image = cv2.drawContours(mask,[screenCnt],0,255,-1,)
-    new_image = cv2.bitwise_and(self.__img, self.__img, mask=mask)
-
-    logTxt = f'''new_image -- alleen het kenteken'''
-    print(logTxt)
-    try:
-      cv2.imshow(logTxt, new_image)
-      cv2.waitKey(3000)
-      cv2.destroyAllWindows()
-    except Exception as ex1:
-        print(traceback.print_exc())
-    finally:
+      logTxt = f'''new_image -- alleen het kenteken'''
+      print(logTxt)
+      try:
+        cv2.imshow(logTxt, new_image)
+        cv2.waitKey(3000)
         cv2.destroyAllWindows()
+      except Exception as ex1:
+          print(traceback.print_exc())
+      finally:
+          cv2.destroyAllWindows()
 
-    # Now crop
-    (x, y) = np.where(mask == 255)
-    (topx, topy) = (np.min(x), np.min(y))
-    (bottomx, bottomy) = (np.max(x), np.max(y))
-    Cropped = self.__grayImg[topx:bottomx+1, topy:bottomy+1]
-    logTxt = f'''Cropped -- alleen het kenteken'''
-    print(logTxt)
-    try:
-      cv2.imshow(logTxt, Cropped)
-    except Exception as ex1:
-        print(traceback.print_exc())
-    finally:
-        cv2.destroyAllWindows()
- 
-    #Read the number plate
-    self.kentekenText = pytesseract.image_to_string(Cropped, config='--psm 11')
-    logTxt = f"De herkende kenteken is: {self.kentekenText}"
-    print(logTxt)
+      # Now crop
+      (x, y) = np.where(mask == 255)
+      (topx, topy) = (np.min(x), np.min(y))
+      (bottomx, bottomy) = (np.max(x), np.max(y))
+      Cropped = self.__grayImg[topx:bottomx+1, topy:bottomy+1]
+      logTxt = f'''Cropped -- alleen het kenteken'''
+      print(logTxt)
+      try:
+        cv2.imshow(logTxt, Cropped)
+      except Exception as ex1:
+          print(traceback.print_exc())
+      finally:
+          cv2.destroyAllWindows()
+  
+      #Read the number plate
+      self.kentekenText = pytesseract.image_to_string(Cropped, config='--psm 11')
+      logTxt = f"De herkende kenteken is: {self.kentekenText}"
+      print(logTxt)
 
-    logTxt = f'toon image'
-    print(logTxt)
-    try:        
-      cv2.imshow('image',self.__img)
-      cv2.waitKey(3000)
-    except Exception as ex1:
-        print(traceback.print_exc())
-    finally:
-        cv2.destroyAllWindows()
-    logTxt = f'toon cropped'
-    print(logTxt)    
-    try:
-      cv2.imshow(logTxt, Cropped)
-      cv2.waitKey(3000)
-    except Exception as ex1:
-        print(traceback.print_exc())
-    finally:
-        cv2.destroyAllWindows()
+      logTxt = f'toon image'
+      print(logTxt)
+      try:        
+        cv2.imshow('image',self.__img)
+        cv2.waitKey(3000)
+      except Exception as ex1:
+          print(traceback.print_exc())
+      finally:
+          cv2.destroyAllWindows()
+      logTxt = f'toon cropped'
+      print(logTxt)    
+      try:
+        cv2.imshow(logTxt, Cropped)
+        cv2.waitKey(3000)
+      except Exception as ex1:
+          print(traceback.print_exc())
+      finally:
+          cv2.destroyAllWindows()
 
-    print("Wachten 5 seconden..")
-    time.sleep(5)
+      print("Wachten 5 seconden..")
+      time.sleep(5)
+
     cv2.destroyAllWindows()
+
 
   @property
   def edgedImg(self):
@@ -233,10 +235,12 @@ if __name__=='__main__':
   print("App start")
   kenteken1 = clsKentekenHerkenning()
 
-  kentekens = ["kenteken_borent.jpg", "minicooper1.jpg", "NL_auto_02.jpg", "NL_auto_lancia01.jpg", "NL_auto_lancia02.jpg",
-              "NL_auto_vooraanzicht01_aygo.jpg", "NL_auto_vooraanzicht03_aygo.jpg", "meterstand_elektra20220429.jpg", "meterstand_elektra20220429_orig.jpg",
+  kentekens = [
+              "NL_auto_vooraanzicht03_aygo.jpg", "meterstand_elektra20220429.jpg", "meterstand_elektra20220429_orig.jpg",
+              "kenteken_borent.jpg", "minicooper1.jpg", "NL_auto_02.jpg", "NL_auto_lancia01.jpg", "NL_auto_vooraanzicht01_aygo.jpg",
               "meterstand_elektra20220516.jpg", "meterstand_elektra20220630.jpg", "meterstand_elektra20220630_test1.jpg", "meterstand_elektra20220630_test2.jpg",
-              "meterstand_elektra20220630_test3.jpg", "meterstand_elektra20220630_test3_geenMeting.jpg", "meterstand_elektra20220630_test3_meting_rarePositie.jpg", "meterstand_elektra202200704.jpg"]
+              "meterstand_elektra20220630_test3.jpg", "meterstand_elektra20220630_test3_geenMeting.jpg", "meterstand_elektra20220630_test3_meting_rarePositie.jpg", "meterstand_elektra202200704.jpg"
+              ]
 
   try:
     for item1 in kentekens:
