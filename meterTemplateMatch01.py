@@ -32,6 +32,9 @@ class clsMain:
         plaatjesDict = [{"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test1.jpg''',
                          "imgTemplateSr1" : templateMeterstand},
 
+                         {"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra202200704.jpg''',
+                         "imgTemplateSr1" : templateMeterstand},
+
                          {"imgSrc1" : f'''{self.scriptPath}/assets/meterstand_elektra20220630_test2.jpg''',
                          "imgTemplateSr1" : templateMeterstand},
 
