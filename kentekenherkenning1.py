@@ -236,8 +236,9 @@ if __name__=='__main__':
   kenteken1 = clsKentekenHerkenning()
 
   kentekens = [
+              "kenteken_borent.jpg", "minicooper1.jpg",
               "NL_auto_vooraanzicht03_aygo.jpg", "meterstand_elektra20220429.jpg", "meterstand_elektra20220429_orig.jpg",
-              "kenteken_borent.jpg", "minicooper1.jpg", "NL_auto_02.jpg", "NL_auto_lancia01.jpg", "NL_auto_vooraanzicht01_aygo.jpg",
+              "NL_auto_02.jpg", "NL_auto_lancia01.jpg", "NL_auto_vooraanzicht01_aygo.jpg",
               "meterstand_elektra20220516.jpg", "meterstand_elektra20220630.jpg", "meterstand_elektra20220630_test1.jpg", "meterstand_elektra20220630_test2.jpg",
               "meterstand_elektra20220630_test3.jpg", "meterstand_elektra20220630_test3_geenMeting.jpg", "meterstand_elektra20220630_test3_meting_rarePositie.jpg", "meterstand_elektra202200704.jpg"
               ]
