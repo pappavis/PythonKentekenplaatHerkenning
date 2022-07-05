@@ -38,7 +38,7 @@ Voor je deze code uitvoer moet je dit ook clone!
 ## Stap 5: Python kentekenplaat herkenning
 Probeer een output
 
-<img src="https://github.com/pappavis/KentekenplaatHerkenning/blob/main/minicooper1.jpg" width="40%" height="40%">
+<img src="./assets/minicooper1.jpg" width="40%" height="40%">
 
 ```bash
 (venv) pi@raspberrypi:$ cd PythonKentekenplaatHerkenning
