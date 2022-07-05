@@ -166,6 +166,10 @@ class clsMain:
 
 if __name__ == "__main__":
     print("App start")
+    print(f"")
+    print(f"SYNOPIS:")
+    print(f"Deze code loopt door een dir en probeert meterlezingen/kentekens te detecteren  op basis van een gegeven template en daarin de kentekentekst proberen bepalen.")
+    print(f"")
     main1 = clsMain()
     main1.main()
     print("App eind")
