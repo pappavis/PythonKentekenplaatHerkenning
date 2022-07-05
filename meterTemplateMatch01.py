@@ -102,7 +102,8 @@ class clsMain:
                 except Exception as ex1:
                     print(traceback.print_exc())
 
-                resultOCR = pytesseract.image_to_string(image=resultImg)
+                # ref --> https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/
+                resultOCR = pytesseract.image_to_string(image=resultImg, config="--psm 6")
                 print(f'''strOutOCR={resultOCR}''')
 
                 #ocrStr = pytesseract.image_to_string(resultImg)
