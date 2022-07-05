@@ -186,8 +186,6 @@ class clsKentekenHerkenning:
         print(logTxt)
       except Exception as ex1:
           print(traceback.print_exc())
-      finally:
-          cv2.destroyAllWindows()
 
       print("Wachten 5 seconden..")
       time.sleep(5)
