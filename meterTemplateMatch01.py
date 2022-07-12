@@ -23,7 +23,7 @@ class clsMain:
         self.scriptFull = PurePath(__file__)
         self.scriptPath = str(PurePath(self.scriptFull.parent))        
 
-    def main(self, imgSrc=None, imgTemplateSr=None):
+    def getOCRedFromImage(self, imgSrc=None, imgTemplateSr=None):
         '''Main routine'''
         intTeller = 0
         print(f'''{intTeller} Probeer demo: {imgSrc}''')
@@ -105,6 +105,10 @@ class clsMain:
 
 if __name__ == "__main__":
     print("App start")
+    print(f"")
+    print(f"SYNOPIS:")
+    print(f"Deze code loopt door een dir en probeert meterlezingen/kentekens te detecteren  op basis van een gegeven template en daarin de kentekentekst proberen bepalen.")
+    print(f"")
 
     main1 = clsMain()
     templateMeterstand = f'''{main1.scriptPath}/assets/meterstand_template_leeg.jpg'''
@@ -158,20 +162,22 @@ if __name__ == "__main__":
                             "imgTemplateSr" : templateKentekenNLToUse02}
                         ]
 
+        ocredKentekens = []
+
         for item1 in plaatjesArr:
-            ocrTxt = main1.main(imgSrc=item1["imgSrc"], imgTemplateSr=item1["imgTemplateSr"])
+            ocrTxt = main1.getOCRedFromImage(imgSrc=item1["imgSrc"], imgTemplateSr=item1["imgTemplateSr"])
+            print("")
+            print("")
+            ocredKentekens.append(ocrTxt)
             print(f'''ocrTxt={ocrTxt}''')
             print("")
             print("")
+        
+        print(f"ocredKentekens:\n{ocredKentekens}")
 
     except Exception as ex1:
         print(traceback.print_exc())
     finally:
         cv2.destroyAllWindows()
 
-    print(f"")
-    print(f"SYNOPIS:")
-    print(f"Deze code loopt door een dir en probeert meterlezingen/kentekens te detecteren  op basis van een gegeven template en daarin de kentekentekst proberen bepalen.")
-    print(f"")
-    main1.main()
     print("App eind")
