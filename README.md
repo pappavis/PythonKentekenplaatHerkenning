@@ -18,8 +18,8 @@ Stap 1. Installeren diverse bibliotheken
 pi@raspberrypi: $ sudo apt install -y python-is-python3 python3-pip python3-opencv 
 pi@raspberrypi: $ python3 -m pip install virtualenv
 pi@raspberrypi: $ mkdir ~/venv/
-pi@raspberrypi: $ python3 -m virtualenv ~/venv/
-pi@raspberrypi: $ source ~/venv/bin/activate
+pi@raspberrypi: $ python3 -m virtualenv ~/venv/venv
+pi@raspberrypi: $ source ~/venv/venv/bin/activate
 ```
 
 ## Stap 3. Installeer python bibliotheken
